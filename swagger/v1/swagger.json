@@ -1,0 +1,45 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/gallery_items": {
+      "get": {
+        "summary": "An endpoint to return both movies and seasons, ordered by creation",
+        "tags": [
+          "Movies And Seasons"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/movies": {
+      "get": {
+        "summary": "An endpoint to returns  movies, ordered by creation",
+        "tags": [
+          "Movies"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "variables": {
+        "defaultHost": {
+          "default": "localhost:3000"
+        }
+      }
+    }
+  ]
+}
