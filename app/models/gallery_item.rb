@@ -4,7 +4,7 @@ class GalleryItem < ApplicationRecord
 
   validates :plot, presence: true
   validates :title, presence: true
-
+  
   # fetch and cache the data
   def self.fetch_and_cache
     Rails.cache.fetch("movies_and_seasons", expires_in: 12.hours) do

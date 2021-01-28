@@ -13,18 +13,6 @@ FactoryBot.define do
   
     factory :gallery_item_with_empty_plot, traits: [:empty_plot]
     factory :gallery_item_with_empty_title, traits: [:empty_title]
-  
-    factory :random_movie do 
-      title { Faker::Movie.title }
-      plot { Faker::Movie.quote }
-      type { 'Movie' }
-    end
-  
-    factory :random_season do
-      title { Faker::TvShows::BigBangTheory.character  }
-      plot { Faker::TvShows::BigBangTheory.quote  } 
-      # type { 'Season' }
-    end
   end
 
 end

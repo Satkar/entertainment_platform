@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       constraints format: :json do
         resources :gallery_items, only: [:index]
         resources :movies, only: [:index]
+        resources :seasons, only: [:index]
       end
     end
   end

@@ -30,6 +30,19 @@
           }
         }
       }
+    },
+    "/api/v1/seasons": {
+      "get": {
+        "summary": "An endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number.",
+        "tags": [
+          "Seasons"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "servers": [
