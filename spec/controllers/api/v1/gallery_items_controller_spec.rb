@@ -21,9 +21,9 @@ RSpec.describe Api::V1::GalleryItemsController do
       it "should return gallary items with ascending order for creation date" do 
         get :index
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body).map{|r| r['id']}).to match_array(GalleryItem.all.map(&:id))
+        expect(JSON.parse(response.body).map{|r| r['id']}).to match_array(GalleryItem.movie_and_seasons.ordered_by_creation.map(&:id))
       end
-      
+
     end
   end
 end

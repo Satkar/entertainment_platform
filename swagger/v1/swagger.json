@@ -43,6 +43,40 @@
           }
         }
       }
+    },
+    "/api/v1/users": {
+      "post": {
+        "summary": "An endpoint to create Users",
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully created"
+          },
+          "400": {
+            "description": "Failed due to invalid email or user already exists"
+          }
+        }
+      }
     }
   },
   "servers": [

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         resources :gallery_items, only: [:index]
         resources :movies, only: [:index]
         resources :seasons, only: [:index]
+        resources :users, only: [:create]
       end
     end
   end

@@ -5,7 +5,7 @@ module Api
     class MoviesController < ApplicationController
       
       def index
-        movies = Movie.fetch_and_cache.as_json
+        movies = Movie.fetch_and_cache
         render json: movies
       end
 

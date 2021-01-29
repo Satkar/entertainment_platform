@@ -5,7 +5,7 @@ module Api
     class GalleryItemsController < ApplicationController
       
       def index
-        movies_and_seasons = GalleryItem.fetch_and_cache.as_json
+        movies_and_seasons = GalleryItem.fetch_and_cache
         render json: movies_and_seasons
       end
 

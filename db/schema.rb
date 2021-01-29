@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_27_200535) do
+ActiveRecord::Schema.define(version: 2021_01_29_131823) do
 
   create_table "gallery_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
@@ -20,6 +20,33 @@ ActiveRecord::Schema.define(version: 2021_01_27_200535) do
     t.datetime "updated_at", null: false
     t.integer "season_id"
     t.integer "serial_num"
+  end
+
+  create_table "gallery_items_purchase_options", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "gallery_item_id", null: false
+    t.integer "purchase_option_id", null: false
+    t.index ["gallery_item_id", "purchase_option_id"], name: "index_gallery_items_purchase_options", unique: true
+  end
+
+  create_table "library_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "gallery_item_id", null: false
+    t.integer "purchase_option_id", null: false
+    t.datetime "expires_at", null: false
+    t.index ["user_id", "gallery_item_id", "purchase_option_id"], name: "index_library_items", unique: true
+  end
+
+  create_table "purchase_options", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.float "price"
+    t.string "video_quality"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
