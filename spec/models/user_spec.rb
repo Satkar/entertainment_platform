@@ -20,11 +20,10 @@ RSpec.describe User do
   end
 
   context "While creating a user if user alreaady exists with the same email" do
-    before do 
-      FactoryBot.create(:user)
-    end
+    
+    let(:last_user) { FactoryBot.create(:user) }
 
-    subject { FactoryBot.create(:user)}
+    subject { FactoryBot.create(:user, email: last_user.email)}
     it "should return user exist error" do 
       expect{ subject }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Email has already been taken')
     end
@@ -37,6 +36,32 @@ RSpec.describe User do
     
     it "should return true" do 
       expect(subject).to eq(User.last)
+    end
+  end
+
+  describe "#purchase_now" do
+    subject { user.purchase_now(gallery_item, purchase_option) }
+  
+    context "when user does not have a active subscription" do
+      let(:user) { FactoryBot.create(:user)}
+      let(:gallery_item) { FactoryBot.create(:gallery_item)}
+      let(:purchase_option) { FactoryBot.create(:sd_price)} 
+      
+      it "should create a new subscription" do
+        expect(subject.id).to eq(LibraryItem.last.id)
+      end
+    end 
+
+    context "When subscriptiion is not yet expired" do
+      let(:subscription) { FactoryBot.create(:library_item) }
+
+      let(:user) { subscription.user}
+      let(:gallery_item) { subscription.gallery_item}
+      let(:purchase_option) { subscription.purchase_option}
+      
+      it "should return false" do
+        expect(subject).to eq(false)
+      end
     end
   end
 

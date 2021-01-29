@@ -9,6 +9,11 @@ module Api
         render json: user
       end
 
+      def index
+        users = User.all.as_json
+        render json: users
+      end
+
       private
       def user_params
         params.require(:user).permit(:email)

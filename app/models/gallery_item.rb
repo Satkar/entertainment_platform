@@ -1,5 +1,6 @@
 # This class represnets GalleryItem in the system
 class GalleryItem < ApplicationRecord
+  has_many :library_items
   scope :ordered_by_creation, -> { order('created_at asc') }
   scope :movie_and_seasons, -> { where(type: ['Movie', 'Season']) }
 

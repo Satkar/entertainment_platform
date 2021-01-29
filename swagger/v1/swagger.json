@@ -31,6 +31,99 @@
         }
       }
     },
+    "/api/v1/users/{user_id}/purchases": {
+      "get": {
+        "summary": "An endpoint to get the library of a user ordered by the remaining time to watch the content.",
+        "tags": [
+          "User Library"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns list of user's library with active subscription"
+          },
+          "404": {
+            "description": "user not found error"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/purchases?gallery_item_id={gallery_item_id}&purchase_option_id={purchase_option_id}": {
+      "post": {
+        "summary": "An endpoint for a user to perform a purchase of a content.",
+        "tags": [
+          "User Library"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "gallery_item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "purchase_option_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer"
+                  },
+                  "gallery_item_id": {
+                    "type": "integer"
+                  },
+                  "purchase_option_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "gallery_item_id",
+                  "purchase_option_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "previous subscription is still active!"
+          },
+          "404": {
+            "description": "Movie/Season, User or Purchase option not found"
+          }
+        }
+      }
+    },
     "/api/v1/seasons": {
       "get": {
         "summary": "An endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number.",
@@ -45,10 +138,33 @@
       }
     },
     "/api/v1/users": {
+      "get": {
+        "summary": "An endpoint to list Users",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing all the users"
+          }
+        }
+      }
+    },
+    "/api/v1/users?user[email]={email}": {
       "post": {
         "summary": "An endpoint to create Users",
         "tags": [
           "Users"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "required": true,

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    email { "sansat1387@gmail.com" }
+    email { Faker::Internet.email }
     
     trait :empty_email do
       email { nil }
