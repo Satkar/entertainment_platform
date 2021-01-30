@@ -29,7 +29,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # gem 'rack-cors'
 
 gem 'will_paginate'
-gem 'api-pagination'
 
 # Api Documentation
 gem 'open_api-rswag'

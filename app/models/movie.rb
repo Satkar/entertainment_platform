@@ -8,7 +8,7 @@ class Movie < GalleryItem
     # cache the result
     def self.fetch_and_cache
       Rails.cache.fetch("movies", expires_in: 12.hours) do
-        self.ordered_by_creation.includes(:purchase_options)
+        self.ordered_by_creation.includes(:purchase_options).to_a
       end
     end
   

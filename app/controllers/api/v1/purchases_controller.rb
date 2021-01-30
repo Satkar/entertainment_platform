@@ -8,7 +8,11 @@ module Api
 
       # Lists purchases of the specified user
       def index
-        library = paginate @user.library
+        library = @user.library.paginate(
+          page: params[:page], 
+          per_page: params[:per_page]
+        )
+
         library = library.as_json(
           only: [:id, :expires_at], 
           include: [ 

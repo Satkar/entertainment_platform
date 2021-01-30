@@ -6,7 +6,11 @@ module Api
       
       # Lists Movies in the syetem 
       def index
-        movies = paginate Movie.fetch_and_cache
+        movies = Movie.fetch_and_cache.paginate(
+          page: params[:page], 
+          per_page: params[:per_page]
+        )
+        
         movies = movies.as_json(
           only: [:id, :title, :plot, :created_at], 
           include: [ purchase_options: { only: [:id, :price, :video_quality] } ]

@@ -44,7 +44,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    api-pagination (4.8.2)
     arel (9.0.0)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
@@ -184,7 +183,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  api-pagination
   bootsnap (>= 1.1.0)
   factory_bot_rails
   faker

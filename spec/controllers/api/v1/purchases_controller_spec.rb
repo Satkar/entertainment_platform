@@ -60,7 +60,7 @@ RSpec.describe Api::V1::PurchasesController do
       it "should return error message" do 
         post :create, params: { user_id: user.id, gallery_item_id: gallery_item.id, purchase_option_id: 11 }
         expect(response.status).to eq(404)
-        expect(JSON.parse(response.body)).to eq({"error"=>"Couldn't find PurchaseOption with 'id'=11 [WHERE `gallery_items_purchase_options`.`gallery_item_id` = ?]"})
+        expect(JSON.parse(response.body)).to eq({"error"=>"Couldn't find PurchaseOption with 'id'=11"})
       end 
     end
   

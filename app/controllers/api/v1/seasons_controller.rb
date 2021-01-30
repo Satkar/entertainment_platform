@@ -6,7 +6,11 @@ module Api
       
       # Lists seasons with episodes in the system
       def index
-        seasons = paginate Season.fetch_and_cache
+        seasons = Season.fetch_and_cache.paginate(
+          page: params[:page], 
+          per_page: params[:per_page]
+        )
+        
         seasons = seasons.as_json(
           only: [:id, :title, :plot, :created_at],  
           include: [
