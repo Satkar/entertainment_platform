@@ -5,7 +5,7 @@ class Season < GalleryItem
   has_many :gallery_items_purchase_options, foreign_key: 'gallery_item_id', dependent: :destroy
   has_many :purchase_options, through: :gallery_items_purchase_options
   
-  after_commit :delete_clear_cache
+  after_commit :flush_cache
 
   # cache the result
   def self.fetch_and_cache
@@ -16,7 +16,7 @@ class Season < GalleryItem
 
   private
   # clear the cache
-  def delete_clear_cache
+  def flush_cache
     Rails.cache.delete('seasons_with_episodes')
     Rails.cache.delete('movies_and_seasons')
   end
