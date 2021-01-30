@@ -18,6 +18,7 @@ module Api
             }
           ]
         )
+
         render json: movies_and_seasons
       end
 

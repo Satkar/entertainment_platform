@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe Api::V1::MoviesController do
   describe "#index" do 
     
+    before(:each) do 
+      Rails.cache.delete("movies")
+    end
+
     context "When there are no movies presnet in the system" do 
       it "should return empty array" do 
         get :index

@@ -3,6 +3,15 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence:true, uniqueness: true
   has_many :library_items, dependent: :destroy
 
+  after_commit :flush_cache
+
+  # cache the result
+  def self.fetch_and_cache
+    Rails.cache.fetch("users", expires_in: 12.hours) do
+      all.to_a
+    end
+  end
+
   # lists all active subscriptions of user ordered by expiry date
   def library
     library_items.active_subscriptions.ordered_by_expiry.includes(:gallery_item, :purchase_option)
@@ -27,5 +36,9 @@ class User < ApplicationRecord
     ).active_subscriptions
     return nil if list.empty?
     list.last.calculate_remaining_time
+  end
+
+  def flush_cache
+    Rails.cache.delete('users')
   end
 end

@@ -12,11 +12,11 @@ module Api
 
       # Lists the available users in the system
       def index
-        users = User.all.paginate(
+        users = User.fetch_and_cache.paginate(
           page: params[:page], 
           per_page: params[:per_page]
         )
-        
+
         users = users.as_json(only: [:id, :email])
         render json: users
       end

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe Api::V1::GalleryItemsController do
   describe "#index" do 
     
+    before(:each) do 
+      Rails.cache.delete("movies_and_seasons")
+    end
+    
     context "When there are no gallery items presnet in the system" do 
       it "should return empty hash" do 
         get :index
