@@ -47,8 +47,8 @@ RSpec.describe User do
       let(:gallery_item) { FactoryBot.create(:gallery_item)}
       let(:purchase_option) { FactoryBot.create(:sd_price)} 
       
-      it "should create a new subscription" do
-        expect(subject.id).to eq(LibraryItem.last.id)
+      it "should create a new subscription and return true" do
+        expect(subject).to eq(true)
       end
     end 
 
@@ -59,8 +59,8 @@ RSpec.describe User do
       let(:gallery_item) { subscription.gallery_item}
       let(:purchase_option) { subscription.purchase_option}
       
-      it "should return false" do
-        expect(subject).to eq(false)
+      it "should return remaining time" do
+        expect(subject).to eq(subscription.calculate_remaining_time)
       end
     end
   end

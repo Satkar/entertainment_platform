@@ -6,29 +6,35 @@ describe 'User Purchases API' do
 
     get 'An endpoint to get the library of a user ordered by the remaining time to watch the content.' do
       tags 'User Library'
-      parameter name: :user_id, :in => :path, :type => :integer
       produces 'application/json'
-      
+      parameter name: :user_id, :in => :path, :type => :integer
+      parameter name: :page, in: :query, description: 'Page Number', type: :string
+      parameter name: :per_page, in: :query, description: 'Number of records per page', type: :string
+
       response '200', "returns list of user's library with active subscription" do
         let(:user_id) { FactoryBot.create(:user).id }
+        let(:page) { 1 }
+        let(:per_page) { 5 }
         run_test!
       end
 
       response '404', "user not found error" do
         let(:user_id) { 100 }
+        let(:page) { 1 }
+        let(:per_page) { 5 }
         run_test!
       end
     end
   end
 
 
-  path '/api/v1/users/{user_id}/purchases?gallery_item_id={gallery_item_id}&purchase_option_id={purchase_option_id}' do
+  path '/api/v1/users/{user_id}/purchases' do
 
     post 'An endpoint for a user to perform a purchase of a content.' do
       tags 'User Library'
-      parameter name: :user_id, :in => :path, :type => :integer
-      parameter name: :gallery_item_id, :in => :path, :type => :integer
-      parameter name: :purchase_option_id, :in => :path, :type => :integer
+      parameter name: :user_id, in: :path, type: :integer, description: 'User Id'
+      parameter name: :gallery_item_id, in: :query, type: :integer, description: 'Movie or Season ID'
+      parameter name: :purchase_option_id, in: :query, type: :integer, description: 'Purchase Option ID'
       consumes 'application/json'
       request_body_json schema: {
         type: :object,
@@ -50,7 +56,7 @@ describe 'User Purchases API' do
         run_test!
       end
 
-      response '200', 'previous subscription is still active!' do
+      response '409', 'previous subscription is still active!' do
         let(:movie) { FactoryBot.create(:movie_with_sd_quality) }
         
         let(:library_item) do 

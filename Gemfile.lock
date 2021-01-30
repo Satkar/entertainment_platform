@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    api-pagination (4.8.2)
     arel (9.0.0)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
@@ -177,11 +178,13 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  api-pagination
   bootsnap (>= 1.1.0)
   factory_bot_rails
   faker
@@ -195,6 +198,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  will_paginate
 
 RUBY VERSION
    ruby 2.7.0p0

@@ -8,13 +8,7 @@ class Movie < GalleryItem
     # cache the result
     def self.fetch_and_cache
       Rails.cache.fetch("movies", expires_in: 12.hours) do
-        self.ordered_by_creation.includes(:purchase_options).as_json(
-          only: [:id, :title, :plot, :type, :created_at], 
-            include: [purchase_options: {
-              only: [:id, :price, :video_quality]
-            }
-          ]
-        ).to_a
+        self.ordered_by_creation.includes(:purchase_options)
       end
     end
   

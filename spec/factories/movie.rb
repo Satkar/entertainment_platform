@@ -19,5 +19,14 @@ FactoryBot.define do
       end
     end
 
+    factory :movie_with_hd_and_sd_quality do
+      after :create do |movie|
+        hd_video = create :hd_price
+        sd_video = create :sd_price
+        create :gallery_items_purchase_option, gallery_item_id: movie.id, purchase_option_id: hd_video.id
+        create :gallery_items_purchase_option, gallery_item_id: movie.id, purchase_option_id: sd_video.id
+      end
+    end
+
   end
 end

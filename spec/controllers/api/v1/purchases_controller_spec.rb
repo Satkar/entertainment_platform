@@ -83,10 +83,12 @@ RSpec.describe Api::V1::PurchasesController do
         )
       end
 
+      let(:remaining_time) { LibraryItem.last.calculate_remaining_time }
+
       it "should return duplicate subscription message" do 
         post :create, params: { user_id: user.id, gallery_item_id: gallery_item.id, purchase_option_id: purchase_option.id }
-        expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)).to eq({"message"=>"Your previous subscription is still active!"})
+        expect(response.status).to eq(409)
+        expect(JSON.parse(response.body)).to eq({"message"=>"Your can try this subscription after #{remaining_time}!"})
       end 
     end
     

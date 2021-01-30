@@ -32,4 +32,21 @@ RSpec.describe LibraryItem do
     end
   end
 
+  describe "#calculate_remaining_time" do   
+    subject { library_item.calculate_remaining_time }
+    context "when library item is exipred" do
+      let(:library_item) { FactoryBot.create(:library_item, expires_at: DateTime.now - 1.day) }
+      it "should return nil" do 
+        expect(subject).to eq(nil)
+      end 
+    end
+
+    context "when library item is not exipred" do
+      let(:library_item) { FactoryBot.create(:library_item) }
+      it "should return remaining Time" do 
+        expect(subject).to eq("3 day/s ")
+      end 
+    end
+  end
+
 end

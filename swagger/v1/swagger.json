@@ -11,22 +11,58 @@
         "tags": [
           "Movies And Seasons"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of records per page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Lists movies and seasons, ordered by creation"
           }
         }
       }
     },
     "/api/v1/movies": {
       "get": {
-        "summary": "An endpoint to returns  movies, ordered by creation",
+        "summary": "An endpoint to returns movies, ordered by creation",
         "tags": [
           "Movies"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of records per page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Lists movies, ordered by creation"
           }
         }
       }
@@ -45,6 +81,22 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of records per page",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -55,9 +107,7 @@
             "description": "user not found error"
           }
         }
-      }
-    },
-    "/api/v1/users/{user_id}/purchases?gallery_item_id={gallery_item_id}&purchase_option_id={purchase_option_id}": {
+      },
       "post": {
         "summary": "An endpoint for a user to perform a purchase of a content.",
         "tags": [
@@ -67,6 +117,7 @@
           {
             "name": "user_id",
             "in": "path",
+            "description": "User Id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -74,16 +125,16 @@
           },
           {
             "name": "gallery_item_id",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "description": "Movie or Season ID",
             "schema": {
               "type": "integer"
             }
           },
           {
             "name": "purchase_option_id",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "description": "Purchase Option ID",
             "schema": {
               "type": "integer"
             }
@@ -116,6 +167,9 @@
         },
         "responses": {
           "200": {
+            "description": "Subscription Successfully created"
+          },
+          "409": {
             "description": "previous subscription is still active!"
           },
           "404": {
@@ -130,9 +184,27 @@
         "tags": [
           "Seasons"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of records per page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "List seasons ordered by creation, including the list of episodes ordered by its number."
           }
         }
       }
@@ -143,14 +215,30 @@
         "tags": [
           "Users"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of records per page",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Listing all the users"
           }
         }
-      }
-    },
-    "/api/v1/users?user[email]={email}": {
+      },
       "post": {
         "summary": "An endpoint to create Users",
         "tags": [
@@ -158,8 +246,8 @@
         ],
         "parameters": [
           {
-            "name": "email",
-            "in": "path",
+            "name": "user[email]",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"

@@ -27,7 +27,7 @@ RSpec.describe Api::V1::UsersController do
 
     context "While creating a user if user alreaady exists with the same email" do
       before do 
-        FactoryBot.create(:user, email: 'sansat1387@gmail.com')
+        FactoryBot.create(:user, email: 'sansat1387@gmail.com' )
       end
 
       let(:email) { 'sansat1387@gmail.com' }

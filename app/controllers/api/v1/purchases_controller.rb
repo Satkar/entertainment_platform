@@ -8,16 +8,24 @@ module Api
 
       # Lists purchases of the specified user
       def index
-        library = @user.library
+        library = paginate @user.library
+        library = library.as_json(
+          only: [:id, :expires_at], 
+          include: [ 
+            gallery_item: { only: [:title, :plot, :type] }, 
+            purchase_option: { only: [:id, :price, :video_quality] }
+          ]
+        )
         render json: library
       end
 
       # Allows to create a new purchase against user
       def create
-        if @user.purchase_now(@gallery_item, @purchase_option)
+        subscription = @user.purchase_now(@gallery_item, @purchase_option)
+        if subscription == true
           render json: { message: "Subscribed successfully." }  
         else
-          render json: { message: "Your previous subscription is still active!" }  
+          render json: { message: "Your can try this subscription after #{subscription}!" }, status: 409 
         end
       end
 
