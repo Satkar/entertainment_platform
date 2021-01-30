@@ -10,7 +10,13 @@ class GalleryItem < ApplicationRecord
   # fetch and cache the data
   def self.fetch_and_cache
     Rails.cache.fetch("movies_and_seasons", expires_in: 12.hours) do
-      self.movie_and_seasons.ordered_by_creation.as_json(include: [:purchase_options])
+      self.movie_and_seasons.ordered_by_creation.includes(:purchase_options).as_json(
+        only: [:id, :title, :plot, :type, :created_at], 
+          include: [purchase_options: {
+            only: [:id, :price, :video_quality]
+          }
+        ]
+      ).to_a
     end
   end
 end

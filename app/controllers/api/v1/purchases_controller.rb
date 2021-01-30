@@ -6,11 +6,13 @@ module Api
       before_action :set_user, only: [:index, :create]
       before_action :set_gallery_item, :set_purchase_option, only: [:create]
 
+      # Lists purchases of the specified user
       def index
         library = @user.library
         render json: library
       end
 
+      # Allows to create a new purchase against user
       def create
         if @user.purchase_now(@gallery_item, @purchase_option)
           render json: { message: "Subscribed successfully." }  

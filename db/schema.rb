@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2021_01_29_131823) do
   end
 
   create_table "purchase_options", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.float "price"
-    t.string "video_quality"
+    t.float "price", null: false
+    t.string "video_quality", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
