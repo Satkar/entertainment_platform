@@ -61,4 +61,14 @@ This project provides below API's
   ```
   http://localhost:3000/api-docs/index.html
   ``` 
-  Considering your app is running locally on port 3000  
+  Considering your app is running locally on port 3000
+
+### Api Endpoint Documentation
+
+  1. [An endpoint to return the movies, ordered by creation.](https://github.com/Satkar/entertainment_platform/blob/master/public/api_doc/MOVIES_AND_SEASONS.md)
+  2. [An endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number.](https://github.com/Satkar/entertainment_platform/blob/master/public/api_doc/SEASON_LIST.md) 
+  3. [An endpoint to return both movies and seasons, ordered by creation.](https://github.com/Satkar/entertainment_platform/blob/master/public/api_doc/MOVIES_AND_SEASONS.md)
+  4. [An endpoint for a user to perform a purchase of a content.](https://github.com/Satkar/entertainment_platform/blob/master/public/api_doc/PURCHASES.md)
+  5. [An endpoint to get the library of a user ordered by the remaining time to watch the content.](https://github.com/Satkar/entertainment_platform/blob/master/public/api_doc/LIBRARY.md)
+  6. [Create user](https://github.com/Satkar/entertainment_platform/blob/master/public/api_doc/CREATE_USER.md)
+  7. [List users](https://github.com/Satkar/entertainment_platform/blob/master/public/api_doc/LIST_USER.md)
