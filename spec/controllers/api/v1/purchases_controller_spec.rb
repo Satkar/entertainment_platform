@@ -29,6 +29,48 @@ RSpec.describe Api::V1::PurchasesController do
       end
       
     end
+
+    describe "pagination" do
+
+      before do 
+        FactoryBot.create_list(:library_item, 50, user_id: user.id)
+      end
+
+      let(:expected_record_ids) { user.library.paginate(page: page, per_page: per_page).map(&:id) }
+      
+      context "when request does not have pagination parameters" do
+        
+        let(:page) { 1 }
+        let(:per_page) { 25 }
+
+        it "should return first 25 records if there are more than 25 records" do 
+          get :index, params: params
+          expect(response.status).to eq(200)
+          
+          records = JSON.parse(response.body)
+          
+          expect(records.count).to eq(25)
+          expect(records.map{|r| r['id']}).to eq(expected_record_ids)
+        end  
+      end
+
+
+      context "when request has pagination parameters" do
+
+        let(:page) { 2 }
+        let(:per_page) { 3 }
+
+        it "should return expected count and right records" do 
+          get :index, params: { page: page, per_page: per_page }.merge(params)
+          expect(response.status).to eq(200)
+          
+          records = JSON.parse(response.body)
+          
+          expect(records.count).to eq(per_page)
+          expect(records.map{|r| r['id']}).to eq(expected_record_ids)
+        end  
+      end
+    end
   end
 
   describe "#create" do
