@@ -1,4 +1,4 @@
-**Returns list of alive library items order by expiry**
+**An endpoint to get the library of a user ordered by the remaining time to watch the content.**
 ----
 
 * **URL**
