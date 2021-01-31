@@ -1,4 +1,4 @@
-**Returns list of movies order by creation with purchase options**
+**An endpoint to return the seasons ordered by creation, including the list of episodes ordered by its number.**
 ----
 
 * **URL**
