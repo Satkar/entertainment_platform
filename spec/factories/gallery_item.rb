@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :gallery_item do
-    title { "The Usual Suspects" }
-    plot { "A sole survivor tells of the twisty events leading up to a horrific gun battle on a boat, which began when five criminals met at a seemingly random police lineup." }
+    title { Faker::Movie.title }
+    plot { Faker::Movie.quote }
     
     trait :empty_plot do 
       plot { nil }

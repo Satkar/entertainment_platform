@@ -17,4 +17,11 @@ class ApplicationController < ActionController::API
     params[:page] = params[:page] || 1
     params[:per_page] = params[:per_page] || 25
   end
+
+  def apply_pagination(collection)
+    collection.paginate(
+      page: params[:page], 
+      per_page: params[:per_page]
+    )
+  end
 end

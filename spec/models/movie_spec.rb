@@ -25,7 +25,7 @@ RSpec.describe Movie do
   end
 
   context "When new movie is created" do 
-    it "should flush the cache and fetch latest data" do
+    it "should flush the cache" do
       expect(subject).not_to be_nil
       expect(Rails.cache.fetch('movies')).not_to be_nil
       
@@ -37,7 +37,7 @@ RSpec.describe Movie do
   end
 
   context "When movie is Updated" do 
-    it "should flush the cache and fetch latest data" do
+    it "should flush the cache" do
       expect(subject).not_to be_nil
       expect(Rails.cache.fetch('movies')).not_to be_nil
       
@@ -51,7 +51,7 @@ RSpec.describe Movie do
   end
 
   context "When movie is destroyed" do 
-    it "should flush the cache and fetch latest data" do
+    it "should flush the cache" do
       expect(subject).not_to be_nil
       expect(Rails.cache.fetch('movies')).not_to be_nil
       

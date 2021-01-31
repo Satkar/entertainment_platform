@@ -46,8 +46,6 @@ describe 'User Purchases API' do
         required: [ 'gallery_item_id', 'purchase_option_id' ]
       }
 
-
-    
       response '200', 'Subscription Successfully created' do
         let(:user_id) { FactoryBot.create(:user).id }
         let(:movie) { FactoryBot.create(:movie_with_sd_quality) }
@@ -79,6 +77,7 @@ describe 'User Purchases API' do
         let(:user_id) { library_item.user_id }
         let(:gallery_item_id) { 50 }
         let(:purchase_option_id) { library_item.purchase_option_id }
+        
         run_test!
       end
     end

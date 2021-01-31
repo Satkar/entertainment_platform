@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Episode do
 
-  context "While creating a episode if season id is not provided" do
+  context "While creating an episode if season id is not provided" do
     
     subject { FactoryBot.create(:episode_without_season_id) }
     
@@ -11,7 +11,7 @@ RSpec.describe Episode do
     end
   end
 
-  context "While creating a episode if serial_num is not provided" do
+  context "While creating an episode if serial_num is not provided" do
     
     subject { FactoryBot.create(:episode_without_serial_num) }
     
@@ -20,7 +20,7 @@ RSpec.describe Episode do
     end
   end
 
-  describe "seasons_with_episodes cache clear" do 
+  describe "seasons_with_episodes flush cache" do 
     before(:each) do
       Rails.cache.write("seasons_with_episodes", "Seasons With Episode are cached") 
     end
@@ -39,10 +39,11 @@ RSpec.describe Episode do
 
     context "When Episode is Updated" do 
       it "should flush the seasons_with_episodes cache" do
-        expect(subject).not_to be_nil
         expect(Rails.cache.fetch('seasons_with_episodes')).not_to be_nil
         
         FactoryBot.create(:random_episode)
+
+        Rails.cache.write("seasons_with_episodes", "Seasons With Episode are cached") 
         
         # Updating the last season
         episode = Episode.last
@@ -54,11 +55,13 @@ RSpec.describe Episode do
     end
 
     context "When Episode is destroyed" do 
-      it "should flush the seasons_with_episodes cachea" do
-        expect(subject).not_to be_nil
+      it "should flush the seasons_with_episodes cache" do
+       
         expect(Rails.cache.fetch('seasons_with_episodes')).not_to be_nil
         
         FactoryBot.create(:random_episode)
+
+        Rails.cache.write("seasons_with_episodes", "Seasons With Episode are cached") 
 
         # Destroying the last season
         Episode.last.destroy

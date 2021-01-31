@@ -1,15 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::PurchasesController do
+  
+  let(:user) { FactoryBot.create(:user) }
+  
   describe "#index" do 
+  
+    let(:params) {{ user_id: user.id }}
     
     context "When there are no active subscriptions for user" do
-      
-      let(:user) { FactoryBot.create(:user) }
-      
-      let(:params) {{ "user_id" => user.id }}
+        
       it "should return empty array" do 
-        get :index, params: { user_id: user.id }
+        get :index, params: params
         expect(response.status).to eq(200)
         expect(JSON.parse(response.body)).to eq([])
       end 
@@ -20,10 +22,8 @@ RSpec.describe Api::V1::PurchasesController do
         FactoryBot.create_list(:library_item, 10, user_id: user.id)
       end
 
-      let(:user) { FactoryBot.create(:user) }
-    
       it "should return all active subscription" do 
-        get :index, params: { user_id: user.id }
+        get :index, params: params
         expect(response.status).to eq(200)
         expect(JSON.parse(response.body).map{|r| r['id']}).not_to eq([])
       end
@@ -33,12 +33,12 @@ RSpec.describe Api::V1::PurchasesController do
 
   describe "#create" do
     
-    let(:user) { FactoryBot.create(:user) }
     let(:gallery_item) { FactoryBot.create(:movie_with_sd_quality)}
     let(:purchase_option) { gallery_item.purchase_options.first }
     
 
     context "When user does not exist" do
+      
       it "should return error message" do 
         post :create, params: { user_id: 55 }
         expect(response.status).to eq(404)
@@ -64,7 +64,7 @@ RSpec.describe Api::V1::PurchasesController do
       end 
     end
   
-    context "When there are no active subscriptions for user" do
+    context "When there are no active subscriptions for user with gallery_item and purchase option" do
       it "should return success message" do 
         post :create, params: { user_id: user.id, gallery_item_id: gallery_item.id, purchase_option_id: purchase_option.id }
         expect(response.status).to eq(200)
@@ -72,7 +72,7 @@ RSpec.describe Api::V1::PurchasesController do
       end 
     end
 
-    context "When previous subscription is still active" do
+    context "When previous subscription is still active for the provided gallery_item_id and purchase_option_id" do
 
       before do 
         FactoryBot.create(

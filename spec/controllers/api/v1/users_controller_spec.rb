@@ -7,7 +7,7 @@ RSpec.describe Api::V1::UsersController do
   
     context "While creating a user if email is not provided" do
       let(:email) { nil }
-      it "should return a message email is required" do
+      it "should return a error message" do
         post :create, params: user
         expect(response.status).to eq(400)
         expect(JSON.parse(response.body)).to eq({"error"=>"Validation failed: Email is invalid, Email can't be blank"})
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::UsersController do
     context "While creating a user if user does not exists with the email" do
       
       let(:email) { 'sansat1387@gmail.com' }
-      it "should return true" do 
+      it "should return last created user" do 
         post :create, params: user
         expect(response.status).to eq(200)
         expect(JSON.parse(response.body)['id']).to eq(User.last.id)

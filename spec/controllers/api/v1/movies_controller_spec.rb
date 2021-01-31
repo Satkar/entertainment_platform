@@ -7,7 +7,7 @@ RSpec.describe Api::V1::MoviesController do
       Rails.cache.delete("movies")
     end
 
-    context "When there are no movies presnet in the system" do 
+    context "When there are no movies present in the system" do 
       it "should return empty array" do 
         get :index
         expect(response.status).to eq(200)
@@ -22,10 +22,10 @@ RSpec.describe Api::V1::MoviesController do
         FactoryBot.create_list(:random_season, 10)
       end
 
-      it "should return movies with ascending order for creation date" do 
+      it "should return movies with ascending order of creation date" do 
         get :index
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body).map{|r| r['id']}).to match_array(Movie.all.map(&:id))
+        expect(JSON.parse(response.body).map{|r| r['id']}).to eq(Movie.all.map(&:id))
       end
       
     end

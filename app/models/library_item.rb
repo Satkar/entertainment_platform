@@ -1,6 +1,6 @@
 # This class represnets LibraryItem in the system
 class LibraryItem < ApplicationRecord
-  VALIDITY = 3.days
+  VALIDITY = 2.days
 
   belongs_to :user
   belongs_to :movie, foreign_key: 'gallery_item_id', optional: true

@@ -6,7 +6,9 @@ RSpec.describe User do
     subject { FactoryBot.create(:user_without_email)}
     
     it "should return a message email is required" do
-      expect{ subject }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Email is invalid, Email can't be blank")
+      expect{ subject }.to raise_error(
+        ActiveRecord::RecordInvalid, "Validation failed: Email is invalid, Email can't be blank"
+      )
     end
 
   end
@@ -15,7 +17,9 @@ RSpec.describe User do
     subject { FactoryBot.create(:user_with_invalid_email)}
     
     it "should return invalid email error" do
-      expect{ subject }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Email is invalid')
+      expect{ subject }.to raise_error(
+        ActiveRecord::RecordInvalid, 'Validation failed: Email is invalid'
+      )
     end
   end
 
@@ -25,7 +29,9 @@ RSpec.describe User do
 
     subject { FactoryBot.create(:user, email: last_user.email)}
     it "should return user exist error" do 
-      expect{ subject }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Email has already been taken')
+      expect{ subject }.to raise_error(
+        ActiveRecord::RecordInvalid, 'Validation failed: Email has already been taken'
+      )
     end
   end
 
@@ -34,7 +40,7 @@ RSpec.describe User do
     
     subject { FactoryBot.create(:user)}
     
-    it "should return true" do 
+    it "should return user" do 
       expect(subject).to eq(User.last)
     end
   end
@@ -47,7 +53,7 @@ RSpec.describe User do
       let(:gallery_item) { FactoryBot.create(:gallery_item)}
       let(:purchase_option) { FactoryBot.create(:sd_price)} 
       
-      it "should create a new subscription and return true" do
+      it "should return true" do
         expect(subject).to eq(true)
       end
     end 

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :library_item, class: 'LibraryItem' do
-    gallery_item_id { (create :random_movie).id }
+    association :movie, factory: :random_movie
     association :purchase_option, factory: :sd_price
     association :user
     expires_at { Time.now + LibraryItem::VALIDITY}

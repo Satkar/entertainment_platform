@@ -13,6 +13,7 @@ RSpec.describe Season do
     context "when data is not cached" do 
       it "returns nil for the cache key seasons_with_episodes" do 
         expect(Rails.cache.fetch('seasons_with_episodes')).to eq(nil)
+        expect(subject).not_to be_nil
       end
     end
 
@@ -25,7 +26,7 @@ RSpec.describe Season do
   end
 
   context "When new Season is created" do 
-    it "should flush the cache and fetch latest data" do
+    it "should flush the cache" do
       expect(subject).not_to be_nil
       expect(Rails.cache.fetch('seasons_with_episodes')).not_to be_nil
       
@@ -37,7 +38,7 @@ RSpec.describe Season do
   end
 
   context "When Season is Updated" do 
-    it "should flush the cache and fetch latest data" do
+    it "should flush the cache" do
       expect(subject).not_to be_nil
       expect(Rails.cache.fetch('seasons_with_episodes')).not_to be_nil
       
@@ -51,7 +52,7 @@ RSpec.describe Season do
   end
 
   context "When Season is destroyed" do 
-    it "should flush the cache and fetch latest data" do
+    it "should flush the cache" do
       expect(subject).not_to be_nil
       expect(Rails.cache.fetch('seasons_with_episodes')).not_to be_nil
       

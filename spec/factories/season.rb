@@ -21,5 +21,7 @@ FactoryBot.define do
         create :gallery_items_purchase_option, gallery_item_id: season.id, purchase_option_id: hd_video.id
       end
     end
+
+    
   end
 end
