@@ -42,6 +42,7 @@ This project provides below API's
    4. Seed the data (Seeding some data for demo purpose)
    5. Run specs
    6. Removing old logs and tempfiles
+   7. Starts the application server on port 3000
    ```
 
 ### How to run the test suite
