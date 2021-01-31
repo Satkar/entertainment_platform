@@ -91,7 +91,7 @@ RSpec.describe Api::V1::PurchasesController do
     context "When Movie or season does not exist with the id provided" do
       
       it "should return error message" do 
-        post :create, params: { user_id: user.id, gallery_item_id: 11, purchase_option_id: purchase_option.id }
+        post :create, params: { user_id: user.id, purchase: { gallery_item_id: 11, purchase_option_id: purchase_option.id } }
         expect(response.status).to eq(404)
         expect(JSON.parse(response.body)).to eq({"error"=>"Couldn't find GalleryItem with 'id'=11"})
       end 
@@ -100,7 +100,7 @@ RSpec.describe Api::V1::PurchasesController do
     context "When purchase option not exist with the id provided" do
       
       it "should return error message" do 
-        post :create, params: { user_id: user.id, gallery_item_id: gallery_item.id, purchase_option_id: 11 }
+        post :create, params: { user_id: user.id, purchase: { gallery_item_id: gallery_item.id, purchase_option_id: 11 } }
         expect(response.status).to eq(404)
         expect(JSON.parse(response.body)).to eq({"error"=>"Couldn't find PurchaseOption with 'id'=11"})
       end 
@@ -108,7 +108,7 @@ RSpec.describe Api::V1::PurchasesController do
   
     context "When there are no active subscriptions for user with gallery_item and purchase option" do
       it "should return success message" do 
-        post :create, params: { user_id: user.id, gallery_item_id: gallery_item.id, purchase_option_id: purchase_option.id }
+        post :create, params: { user_id: user.id, purchase: { gallery_item_id: gallery_item.id, purchase_option_id: purchase_option.id } }
         expect(response.status).to eq(200)
         expect(JSON.parse(response.body)).to eq({"message"=>"Subscribed successfully."})
       end 
@@ -128,7 +128,7 @@ RSpec.describe Api::V1::PurchasesController do
       let(:remaining_time) { LibraryItem.last.calculate_remaining_time }
 
       it "should return duplicate subscription message" do 
-        post :create, params: { user_id: user.id, gallery_item_id: gallery_item.id, purchase_option_id: purchase_option.id }
+        post :create, params: { user_id: user.id, purchase: { gallery_item_id: gallery_item.id, purchase_option_id: purchase_option.id }  }
         expect(response.status).to eq(409)
         expect(JSON.parse(response.body)).to eq({"message"=>"Your can try this subscription after #{remaining_time}!"})
       end 

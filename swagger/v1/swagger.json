@@ -124,7 +124,7 @@
             }
           },
           {
-            "name": "gallery_item_id",
+            "name": "purchase[gallery_item_id]",
             "in": "query",
             "description": "Movie or Season ID",
             "schema": {
@@ -132,7 +132,7 @@
             }
           },
           {
-            "name": "purchase_option_id",
+            "name": "purchase[purchase_option_id]",
             "in": "query",
             "description": "Purchase Option ID",
             "schema": {

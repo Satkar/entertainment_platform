@@ -37,11 +37,11 @@ module Api
       end
 
       def set_gallery_item
-        @gallery_item = GalleryItem.find(params[:gallery_item_id])
+        @gallery_item = GalleryItem.find(params[:purchase][:gallery_item_id])
       end
 
       def set_purchase_option
-        @purchase_option = @gallery_item.purchase_options.find(params[:purchase_option_id])
+        @purchase_option = @gallery_item.purchase_options.find(params[:purchase][:purchase_option_id])
       end
 
     end
