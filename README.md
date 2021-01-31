@@ -22,43 +22,42 @@ This project provides below API's
 * TDD Library - rspec, factoryBot, Faker
 
 ### How to Setup 
-
-   1. Clone the repository 
-    ```
-    git clone git@github.com:Satkar/entertainment_platform.git
-    ```
-   2. Navigate to the project directory
-    ```
-    cd entertainment_platform
-    ```
-   3. Run below command for up and running project 
-    ```
-    bin/setup
-    ```
-     Above command will do following things for you
-      ```
-      1. Installs system dependencies
-      2. Prepares a Database for development and test
-      3. Run migrations
-      4. Seed the data (Seeding some data for demo purpose)
-      5. Run specs
-      6. Removing old logs and tempfiles
-      ```
+1. Clone the repository 
+ ```
+ git clone git@github.com:Satkar/entertainment_platform.git
+ ```
+2. Navigate to the project directory
+ ```
+ cd entertainment_platform
+ ```
+3. Run below command for up and running project 
+ ```
+ bin/setup
+ ```
+  Above command will do following things for you
+   ```
+   1. Installs system dependencies
+   2. Prepares a Database for development and test
+   3. Run migrations
+   4. Seed the data (Seeding some data for demo purpose)
+   5. Run specs
+   6. Removing old logs and tempfiles
+   ```
 
 ### How to run the test suite
-    Navigate to project directory and run
-    ```
-    bundle exec rspec
-    ```
+ Navigate to project directory and run
+ ```
+ bundle exec rspec
+ ```
   
 ### How to run the server locally
-  
-    Go to the project directory and run a command as below 
-    ```
-    bin/rails s
-    ```
+ Navigate to project directory and run 
+ ```
+ bin/rails s
+ ```
 
-### Api endpoint Open Api Documentation can be found at considering your app is running locally on port 3000  
+### Api endpoint Open Api Documentation 
   ```
   http://localhost:3000/api-docs/index.html
   ``` 
+  Considering your app is running locally on port 3000  
