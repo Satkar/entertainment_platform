@@ -11,7 +11,7 @@ module Api
         seasons = seasons.as_json(
           only: [:id, :title, :plot, :created_at],  
           include: [
-            episodes: { only: [:id, :title, :serial_num,] } , 
+            episodes: { only: [:id, :title, :plot, :serial_num,] } , 
             purchase_options: { only: [:id, :price, :video_quality] }
           ]
         )
