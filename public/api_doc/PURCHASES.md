@@ -1,4 +1,4 @@
-**Returns appropriate message on purchase of library item**
+**An endpoint for a user to perform a purchase of a content.**
 ----
 
 * **URL**

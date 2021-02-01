@@ -1,4 +1,4 @@
-**Returns list of movies and seasons order by creation with purchase options**
+**An endpoint to return the movies, ordered by creation.**
 ----
 
 * **URL**
